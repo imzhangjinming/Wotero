@@ -26,7 +26,6 @@ export default class Wolai {
   }
 
   static convertWebURLToAppURL(url: string): string {
-    //   return url.replace(/^https:/, this.APP_URL_PROTOCOL);
     return this.APP_URL_PROTOCOL + url;
   }
 
@@ -70,11 +69,6 @@ export default class Wolai {
 
   private async getDatabaseResponse(): Promise<any> {
     try {
-      // const response = await fetch('https://openapi.wolai.com/v1/databases/' + this.databaseID, {
-      //   method: "GET",
-      //   headers: {Authorization: this.authToken}
-      // })
-
       const response = await Zotero.HTTP.request(
         'GET',
         'https://openapi.wolai.com/v1/databases/' + this.databaseID,
@@ -86,7 +80,6 @@ export default class Wolai {
       // log(JSON.parse(JSON.stringify(response.response)));
       // log('===========================================================================')
 
-      // let _databaseProperties = response.data.data.column_order;
       return response;
     } catch (error) {
       log(error, 'error');
@@ -162,12 +155,6 @@ export default class Wolai {
     const itemProperties: Properties = {
       Name: Wolai.buildRichText(await buildTitle(item)),
     };
-
-    // {
-    //   title: {
-    //     title: Wolai.buildRichText(await buildTitle(item)),
-    //   },
-    // };
 
     const propertyDefinitions: Definition[] = [
       {
