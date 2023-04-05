@@ -4,7 +4,7 @@ import NoteroItem from '../notero-item';
 import WoteroItem from '../wotero-item';
 import Notion, { TitleBuilder } from '../notion';
 import Wolai from '../wolai';
-import { wolaiTitleBuilder }  from '../wolai';
+import { wolaiTitleBuilder } from '../wolai';
 import { loadSyncEnabledCollectionIDs } from '../prefs/collection-sync-config';
 import {
   getNoteroPref,
@@ -84,11 +84,15 @@ export default class SyncManager implements Service {
           item
             .getCollections()
             .some((collectionID) => collectionIDs.has(collectionID))) &&
-        (Zotero.Items.get(item.getAttachments(false)
-                              .slice()
-                              // Sort to get largest ID first
-                              .sort((a, b) => b - a))
-                     .filter((attachment) =>attachment.getField('url')?.startsWith(Wolai.APP_URL_PROTOCOL)).length === 0)
+        Zotero.Items.get(
+          item
+            .getAttachments(false)
+            .slice()
+            // Sort to get largest ID first
+            .sort((a, b) => b - a)
+        ).filter((attachment) =>
+          attachment.getField('url')?.startsWith(Wolai.APP_URL_PROTOCOL)
+        ).length === 0
     );
 
     if (validItems.length) {
@@ -331,7 +335,7 @@ export default class SyncManager implements Service {
     }
   }
 
-  private async saveItemsToWolai(itemIDs: Set<Zotero.Item['id']>){
+  private async saveItemsToWolai(itemIDs: Set<Zotero.Item['id']>) {
     const PERCENTAGE_MULTIPLIER = 100;
 
     const items = Zotero.Items.get(Array.from(itemIDs));
@@ -372,7 +376,6 @@ export default class SyncManager implements Service {
     }
   }
 
-
   private async saveItemToNotion(
     item: Zotero.Item,
     notion: Notion,
@@ -399,7 +402,7 @@ export default class SyncManager implements Service {
     item: Zotero.Item,
     wolai: Wolai,
     buildTitle: wolaiTitleBuilder
-  ){
+  ) {
     const woteroItem = new WoteroItem(item);
     const response = await wolai.saveItemToDatabase(woteroItem, buildTitle);
 
@@ -410,7 +413,7 @@ export default class SyncManager implements Service {
     } else {
       throw new Error(
         'Failed to create Wolai link attachment. ' +
-          'This will result in duplicate Wolai pages. ' 
+          'This will result in duplicate Wolai pages. '
       );
     }
   }

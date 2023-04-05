@@ -174,7 +174,7 @@ export default class WoteroItem {
     return Zotero.URI.getItemURI(this.zoteroItem);
   }
 
-  // 
+  //
   public getWolaiLinkAttachments(): Zotero.Item[] {
     const attachmentIDs = this.zoteroItem
       .getAttachments(false)
