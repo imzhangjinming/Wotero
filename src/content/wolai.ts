@@ -1,51 +1,7 @@
-// import {
-//     // APIErrorCode,
-//     // APIResponseError,
-//     // Client,
-//     Logger,
-//     LogLevel,
-//   } from '@notionhq/client';
-//   import {
-//     CreatePageParameters,
-//     CreatePageResponse,
-//     GetDatabaseResponse,
-//     UpdatePageResponse,
-//   } from '@notionhq/client/build/src/api-endpoints';
 import 'core-js/stable/object/from-entries';
 
-import NoteroItem from './notero-item';
 import WoteroItem from './wotero-item';
 import { log } from './utils';
-// import { request, RequestResult } from './request';
-// import { XMLHttpRequest } from 'xmlhttprequest-ts';
-// import fetch from 'node-fetch';
-// import { AxiosError, AxiosResponse } from 'axios';
-// import axios from 'axios';
-
-//   type CreateDatabasePageParameters = Extract<
-//     CreatePageParameters,
-//     {
-//       parent: {
-//         database_id: string;
-//       };
-//     }
-//   >;
-
-//   type DatabasePageProperties = CreateDatabasePageParameters['properties'];
-
-//   type DatabaseProperties = GetDatabaseResponse['properties'];
-
-//   type DatabasePageProperty = Extract<
-//     DatabasePageProperties[string],
-//     { type?: string }
-//   >;
-
-//   type PropertyType = NonNullable<DatabasePageProperty['type']>;
-
-//   type PropertyRequest<T extends PropertyType> = Extract<
-//     DatabasePageProperty,
-//     { [P in T]: unknown }
-//   >[T];
 
 export type wolaiTitleBuilder = (item: WoteroItem) => string | Promise<string>;
 
@@ -62,13 +18,6 @@ export default class Wolai {
   static PAGE_URL_REGEX = new RegExp(
     `^${Wolai.APP_URL_PROTOCOL}.+([0-9a-f]{32})$`
   );
-
-  // static logger: Logger = (level, message, extraInfo) => {
-  //   log(
-  //     `${message} - ${JSON.stringify(extraInfo)}`,
-  //     level === LogLevel.ERROR ? 'error' : 'warning'
-  //   );
-  // };
 
   static buildRichText(content: string | null): string {
     if (!content) return '';
@@ -95,22 +44,13 @@ export default class Wolai {
   }
 
   public constructor(authToken: string, databaseID: string) {
-    //   this.client = new Client({
-    //     auth: authToken,
-    //     logger: Notion.logger,
-    //   });
     this.authToken = authToken;
     this.databaseID = databaseID;
   }
 
   private async getDatabaseProperties(): Promise<string[]> {
     if (!this._databaseProperties) {
-      // const database = await this.client.databases.retrieve({
-      //   database_id: this.databaseID,
-      // });
-      // this._databaseProperties = database.properties;
       const databaseResponse = await this.getDatabaseResponse();
-      // const content = await databaseResponse.json();
       log(
         '==========================================================================='
       );
@@ -220,7 +160,7 @@ export default class Wolai {
     }
 
     const itemProperties: Properties = {
-      title: Wolai.buildRichText(await buildTitle(item)),
+      Name: Wolai.buildRichText(await buildTitle(item)),
     };
 
     // {
@@ -309,14 +249,14 @@ export default class Wolai {
       },
     ];
 
-    // for (const { name, buildRequest } of propertyDefinitions) {
-    //   const request = await buildRequest();
-    //   itemProperties[name] = request;
-    // }
-    // log('===========================================================================')
-    // log(typeof itemProperties);
-    // log(JSON.stringify(itemProperties))
-    // log('===========================================================================')
+    for (const { name, buildRequest } of propertyDefinitions) {
+      const request = await buildRequest();
+      itemProperties[name] = request;
+    }
+    log('===========================================================================')
+    log(typeof itemProperties);
+    log(JSON.stringify(itemProperties))
+    log('===========================================================================')
 
     const validPropertyDefinitions =
       propertyDefinitions.filter(databaseHasProperty);
@@ -325,14 +265,14 @@ export default class Wolai {
       const request = await buildRequest();
       itemProperties[name] = request;
     }
-    log(
-      '==========================================================================='
-    );
-    log(typeof itemProperties);
-    log(JSON.stringify(itemProperties));
-    log(
-      '==========================================================================='
-    );
+    // log(
+    //   '==========================================================================='
+    // );
+    // log(typeof itemProperties);
+    // log(JSON.stringify(itemProperties));
+    // log(
+    //   '==========================================================================='
+    // );
 
     return itemProperties;
   }
