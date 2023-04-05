@@ -1,7 +1,10 @@
 import { isFullPage } from '@notionhq/client';
 
 import NoteroItem from '../notero-item';
+import WoteroItem from '../wotero-item';
 import Notion, { TitleBuilder } from '../notion';
+import Wolai from '../wolai';
+import { wolaiTitleBuilder }  from '../wolai';
 import { loadSyncEnabledCollectionIDs } from '../prefs/collection-sync-config';
 import {
   getNoteroPref,
@@ -80,7 +83,12 @@ export default class SyncManager implements Service {
         (!requireSyncedCollections ||
           item
             .getCollections()
-            .some((collectionID) => collectionIDs.has(collectionID)))
+            .some((collectionID) => collectionIDs.has(collectionID))) &&
+        (Zotero.Items.get(item.getAttachments(false)
+                              .slice()
+                              // Sort to get largest ID first
+                              .sort((a, b) => b - a))
+                     .filter((attachment) =>attachment.getField('url')?.startsWith(Wolai.APP_URL_PROTOCOL)).length === 0)
     );
 
     if (validItems.length) {
@@ -157,10 +165,47 @@ export default class SyncManager implements Service {
     return new Notion(authToken, databaseID);
   }
 
+  private getWolai() {
+    const authToken = getNoteroPref(NoteroPref.notionToken);
+    const databaseID = getNoteroPref(NoteroPref.notionDatabaseID);
+
+    if (!authToken) {
+      throw new Error(`Missing ${getLocalizedString(NoteroPref.notionToken)}`);
+    }
+
+    if (!databaseID) {
+      throw new Error(
+        `Missing ${getLocalizedString(NoteroPref.notionDatabaseID)}`
+      );
+    }
+
+    return new Wolai(authToken, databaseID);
+  }
+
   private getTitleBuilder(): TitleBuilder {
     const titleBuilders: Record<
       PageTitleFormat,
       (item: NoteroItem) => string | null | Promise<string | null>
+    > = {
+      [PageTitleFormat.itemAuthorDateCitation]: (item) =>
+        item.getAuthorDateCitation(),
+      [PageTitleFormat.itemFullCitation]: (item) => item.getFullCitation(),
+      [PageTitleFormat.itemInTextCitation]: (item) => item.getInTextCitation(),
+      [PageTitleFormat.itemShortTitle]: (item) => item.getShortTitle(),
+      [PageTitleFormat.itemTitle]: (item) => item.getTitle(),
+    };
+
+    const format =
+      getNoteroPref(NoteroPref.pageTitleFormat) || PageTitleFormat.itemTitle;
+    const buildTitle = titleBuilders[format];
+
+    return async (item) => (await buildTitle(item)) || item.getTitle();
+  }
+
+  private getwolaiTitleBuilder(): wolaiTitleBuilder {
+    const titleBuilders: Record<
+      PageTitleFormat,
+      (item: WoteroItem) => string | null | Promise<string | null>
     > = {
       [PageTitleFormat.itemAuthorDateCitation]: (item) =>
         item.getAuthorDateCitation(),
@@ -237,6 +282,7 @@ export default class SyncManager implements Service {
     this.queuedSync = undefined as QueuedSync | undefined;
     this.syncInProgress = true;
 
+    await this.saveItemsToWolai(itemIDs);
     await this.saveItemsToNotion(itemIDs);
 
     if (this.queuedSync && !this.queuedSync.timeoutID) {
@@ -285,6 +331,48 @@ export default class SyncManager implements Service {
     }
   }
 
+  private async saveItemsToWolai(itemIDs: Set<Zotero.Item['id']>){
+    const PERCENTAGE_MULTIPLIER = 100;
+
+    const items = Zotero.Items.get(Array.from(itemIDs));
+    if (!items.length) return;
+
+    this.progressWindow.changeHeadline('Saving items to Wolai...');
+    this.progressWindow.show();
+    const itemProgress = new this.progressWindow.ItemProgress(
+      'chrome://notero/content/style/notion-logo-32.png',
+      ''
+    );
+
+    try {
+      // const notion = this.getNotion();
+      const wolai = this.getWolai();
+      // const buildTitle = this.getTitleBuilder();
+      const wolaiBuildTitle = this.getwolaiTitleBuilder();
+      let step = 0;
+
+      for (const item of items) {
+        step++;
+        const progressMessage = `Item ${step} of ${items.length}`;
+        log(`Saving ${progressMessage} with ID ${item.id}`);
+        itemProgress.setText(progressMessage);
+        await this.saveItemToWolai(item, wolai, wolaiBuildTitle);
+        itemProgress.setProgress((step / items.length) * PERCENTAGE_MULTIPLIER);
+      }
+      itemProgress.setIcon(SyncManager.tickIcon);
+      this.progressWindow.startCloseTimer();
+    } catch (error) {
+      const errorMessage = String(error);
+      log(errorMessage, 'error');
+      if (hasErrorStack(error)) {
+        log(error.stack, 'error');
+      }
+      itemProgress.setError();
+      this.progressWindow.addDescription(errorMessage);
+    }
+  }
+
+
   private async saveItemToNotion(
     item: Zotero.Item,
     notion: Notion,
@@ -303,6 +391,26 @@ export default class SyncManager implements Service {
           'This will result in duplicate Notion pages. ' +
           'Please ensure that the "read content" capability is enabled ' +
           'for the Notero integration at www.notion.so/my-integrations.'
+      );
+    }
+  }
+
+  private async saveItemToWolai(
+    item: Zotero.Item,
+    wolai: Wolai,
+    buildTitle: wolaiTitleBuilder
+  ){
+    const woteroItem = new WoteroItem(item);
+    const response = await wolai.saveItemToDatabase(woteroItem, buildTitle);
+
+    await woteroItem.saveWolaiTag();
+
+    if (true) {
+      await woteroItem.saveWolaiLinkAttachment(response);
+    } else {
+      throw new Error(
+        'Failed to create Wolai link attachment. ' +
+          'This will result in duplicate Wolai pages. ' 
       );
     }
   }
