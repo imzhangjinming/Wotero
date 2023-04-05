@@ -36,7 +36,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.3",
     "child_process": "^1.0.2",
-    "core-js": "^3.29.1",
+    "core-js": "^3.30.0",
     "eventemitter3": "^5.0.0",
     "path": "^0.12.7",
     "xhr2": "^0.2.1"
