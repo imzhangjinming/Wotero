@@ -40,7 +40,8 @@ _Notero 还能在用户修改某个 Zotero 文献的信息后自动更新其对�
 
 <details>
 <summary>点击打开 Wotero 安装步骤</summary>
-1. 从这里下载以 `.xpi` 结尾的插件包。
+
+1. 从 [这里](https://github.com/imzhangjinming/Wotero/releases/tag/v0.0.3) 下载以 `.xpi` 结尾的插件包。
 
 2. 打开 Zotero，选择 **工具 -> 附加组件** 打开插件管理页面，点击右上角的齿轮图标，选择 **Install Add-on From File...**，在弹出的窗口选择刚刚下载的 `.xpi` 文件，点击打开，即可完成插件的安装。
 
