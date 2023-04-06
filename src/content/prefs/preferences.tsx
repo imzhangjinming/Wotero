@@ -2,8 +2,8 @@ import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import ReactDOM from 'react-dom';
 
-import SyncConfigsTable from './sync-configs-table';
 import { getLocalizedString, getXULElementById } from '../utils';
+import SyncConfigsTable from './sync-configs-table';
 
 import { PageTitleFormat } from './wotero-pref';
 

@@ -1,5 +1,5 @@
-import Wolai from './wolai';
 import { buildCollectionFullName } from './utils';
+import Wolai from './wolai';
 
 const APA_STYLE = 'bibliography=http://www.zotero.org/styles/apa';
 
