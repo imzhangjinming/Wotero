@@ -71,7 +71,7 @@ export default class SyncManager implements Service {
   ) {
     const collectionIDs = loadSyncEnabledCollectionIDs();
     if (requireSyncedCollections && !collectionIDs.size) return;
-    
+
     // const regular_items = items.filter((item)=>!item.deleted &&
     // item.isRegularItem())
 
@@ -91,7 +91,7 @@ export default class SyncManager implements Service {
     //         .slice()
     //         // Sort to get largest ID first
     //         .sort((a, b) => b - a)
-    //     ).filter((attachment) => 
+    //     ).filter((attachment) =>
     //         attachment.getDisplayTitle().toLowerCase() === Wolai.TAG_NAME
     //     )
 
@@ -109,14 +109,16 @@ export default class SyncManager implements Service {
           item
             .getCollections()
             .some((collectionID) => collectionIDs.has(collectionID))) &&
-        (Zotero.Items.get(
+        Zotero.Items.get(
           item
             .getAttachments(false)
             .slice()
             // Sort to get largest ID first
             .sort((a, b) => b - a)
-        ).filter((attachment) => attachment.getDisplayTitle().toLowerCase() === Wolai.TAG_NAME
-        ).length === 0)
+        ).filter(
+          (attachment) =>
+            attachment.getDisplayTitle().toLowerCase() === Wolai.TAG_NAME
+        ).length === 0
     );
 
     if (validItems.length) {
@@ -301,33 +303,33 @@ export default class SyncManager implements Service {
       let step = 0;
 
       for (const item of items) {
-          step++;
-          const progressMessage = `Item ${step} of ${items.length}`;
-          log(`Saving ${progressMessage} with ID ${item.id}`);
-          itemProgress.setText(progressMessage);
-          try {
-            await this.saveItemToWolai(item, wolai, wolaiBuildTitle);
-          } catch (error){
-            const errorMessage = String(error);
-            log(errorMessage, 'error');
-            if (hasErrorStack(error)) {
-              log(error.stack, 'error');
-            }
-            itemProgress.setError();
-            this.progressWindow.addDescription(errorMessage);
+        step++;
+        const progressMessage = `Item ${step} of ${items.length}`;
+        log(`Saving ${progressMessage} with ID ${item.id}`);
+        itemProgress.setText(progressMessage);
+        try {
+          await this.saveItemToWolai(item, wolai, wolaiBuildTitle);
+        } catch (error) {
+          const errorMessage = String(error);
+          log(errorMessage, 'error');
+          if (hasErrorStack(error)) {
+            log(error.stack, 'error');
           }
-          itemProgress.setProgress((step / items.length) * PERCENTAGE_MULTIPLIER);
+          itemProgress.setError();
+          this.progressWindow.addDescription(errorMessage);
         }
-        itemProgress.setIcon(SyncManager.tickIcon);
-        this.progressWindow.startCloseTimer();
-      } catch (error) {
-        const errorMessage = String(error);
-        log(errorMessage, 'error');
-        if (hasErrorStack(error)) {
-          log(error.stack, 'error');
-        }
-        itemProgress.setError();
-        this.progressWindow.addDescription(errorMessage);
+        itemProgress.setProgress((step / items.length) * PERCENTAGE_MULTIPLIER);
+      }
+      itemProgress.setIcon(SyncManager.tickIcon);
+      this.progressWindow.startCloseTimer();
+    } catch (error) {
+      const errorMessage = String(error);
+      log(errorMessage, 'error');
+      if (hasErrorStack(error)) {
+        log(error.stack, 'error');
+      }
+      itemProgress.setError();
+      this.progressWindow.addDescription(errorMessage);
     }
   }
 

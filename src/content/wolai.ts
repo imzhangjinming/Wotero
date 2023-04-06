@@ -111,7 +111,7 @@ export default class Wolai {
       'https://openapi.wolai.com/v1/databases/' + this.databaseID + '/rows';
 
     try {
-        const response = await Zotero.HTTP.request('POST', url, {
+      const response = await Zotero.HTTP.request('POST', url, {
         body: data,
         headers: { Authorization: this.authToken },
       });

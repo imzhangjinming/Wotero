@@ -181,11 +181,9 @@ export default class WoteroItem {
       // Sort to get largest ID first
       .sort((a, b) => b - a);
 
-    return Zotero.Items.get(attachmentIDs).filter((attachment) =>
-      {
-        attachment.getDisplayTitle().toLowerCase() === WoteroItem.WOLAI_TAG_NAME
-      }
-    );
+    return Zotero.Items.get(attachmentIDs).filter((attachment) => {
+      attachment.getDisplayTitle().toLowerCase() === WoteroItem.WOLAI_TAG_NAME;
+    });
   }
 
   public getWolaiPageID(): string | undefined {
