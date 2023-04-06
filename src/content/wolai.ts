@@ -1,7 +1,7 @@
 import 'core-js/stable/object/from-entries';
 
-import WoteroItem from './wotero-item';
 import { log } from './utils';
+import WoteroItem from './wotero-item';
 
 export type wolaiTitleBuilder = (item: WoteroItem) => string | Promise<string>;
 

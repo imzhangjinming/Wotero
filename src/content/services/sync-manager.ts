@@ -1,6 +1,3 @@
-import WoteroItem from '../wotero-item';
-import Wolai from '../wolai';
-import { wolaiTitleBuilder } from '../wolai';
 import { loadSyncEnabledCollectionIDs } from '../prefs/collection-sync-config';
 import {
   getWoteroPref,
@@ -13,6 +10,9 @@ import {
   hasErrorStack,
   log,
 } from '../utils';
+import WoteroItem from '../wotero-item';
+import Wolai from '../wolai';
+import { wolaiTitleBuilder } from '../wolai';
 
 import EventManager, { NotifierEventParams } from './event-manager';
 import type { Service } from './service';
@@ -343,13 +343,6 @@ export default class SyncManager implements Service {
 
     await woteroItem.saveWolaiTag();
 
-    if (true) {
-      await woteroItem.saveWolaiLinkAttachment(response);
-    } else {
-      throw new Error(
-        'Failed to create Wolai link attachment. ' +
-          'This will result in duplicate Wolai pages. '
-      );
-    }
+    await woteroItem.saveWolaiLinkAttachment(response);
   }
 }
