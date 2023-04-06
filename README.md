@@ -61,6 +61,7 @@ _Notero 还能在用户修改某个 Zotero 文献的信息后自动更新其对�
 
 <details>
   <summary>点击打开 Wolai 配置步骤</summary>
+
 1. 打开 [Wolai 开发者页面](https://www.wolai.com/wolai/7FB9PLeqZ1ni9FfD11WuUi)，点击 **wolai API 开发者内测申请**，如下图所示。
 
 ![wolai-developer](docs/wolai-developer.png)
@@ -128,6 +129,7 @@ _Notero 还能在用户修改某个 Zotero 文献的信息后自动更新其对�
 
 <details>
   <summary>点击打开 Wotero 配置步骤</summary>
+
 1. 在Zotero中，选择 **工具 -> Wotero首选项** 打开Wotero配置页面。将之前获得的 appToken 和 数据库 ID 分别填入 Wolai appToken 和 数据库 ID，按照说明选择想要监视的文件夹，确保 **当修改条目时同步** 取消勾选
 
 ![wotero-pref](docs/Wotero-pref.png)
@@ -161,6 +163,7 @@ _Notero 还能在用户修改某个 Zotero 文献的信息后自动更新其对�
 
 <details>
 <summary>点击打开笔记模板创建步骤</summary>
+
 1. 创建一个普通的 Wolai 页面，页面内容是论文笔记的模板，就像下面这样
 
 ![note-template](docs/note-template.png)
