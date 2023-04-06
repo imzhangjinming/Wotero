@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/imzhangjinming/Wotero/compare/v0.4.6...v0.0.3) (2023-04-06)
+
+
+### Bug Fixes
+
+* [change attachment url format, delete 'wolai:' prefix] ([f6beed1](https://github.com/imzhangjinming/Wotero/commit/f6beed11985e235782d3e529cd6d61fff04e4c40))
+* [change format] ([039f3a0](https://github.com/imzhangjinming/Wotero/commit/039f3a0c9d52702ba46191341c249797cc2b903c))
+* sync single item and multiple items to wolai success ([5cea2e0](https://github.com/imzhangjinming/Wotero/commit/5cea2e00ad7f88c7fb20f1de5fef5e7a8009c877))
+* sync to wolai success ([2738e71](https://github.com/imzhangjinming/Wotero/commit/2738e718f5d15739ac5995a295d20a2b6a9a26c5))
+* Sync top-level items from context menu ([#226](https://github.com/imzhangjinming/Wotero/issues/226)) ([6b7ed9b](https://github.com/imzhangjinming/Wotero/commit/6b7ed9bff8f19aee5b9e257e5b035d46e99e54a9))
+
+### [0.0.2](https://github.com/imzhangjinming/Wotero/compare/v0.4.6...v0.0.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* [change attachment url format, delete 'wolai:' prefix] ([f6beed1](https://github.com/imzhangjinming/Wotero/commit/f6beed11985e235782d3e529cd6d61fff04e4c40))
+* [change format] ([039f3a0](https://github.com/imzhangjinming/Wotero/commit/039f3a0c9d52702ba46191341c249797cc2b903c))
+* sync single item and multiple items to wolai success ([5cea2e0](https://github.com/imzhangjinming/Wotero/commit/5cea2e00ad7f88c7fb20f1de5fef5e7a8009c877))
+* sync to wolai success ([2738e71](https://github.com/imzhangjinming/Wotero/commit/2738e718f5d15739ac5995a295d20a2b6a9a26c5))
+* Sync top-level items from context menu ([#226](https://github.com/imzhangjinming/Wotero/issues/226)) ([6b7ed9b](https://github.com/imzhangjinming/Wotero/commit/6b7ed9bff8f19aee5b9e257e5b035d46e99e54a9))
+
 ### [0.4.6](https://github.com/dvanoni/notero/compare/v0.4.5...v0.4.6) (2023-02-02)
 
 

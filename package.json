@@ -1,6 +1,6 @@
 {
   "name": "wotero",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Sync Zotero items into a Wolai database",
   "scripts": {
     "build": "node esbuild.js",
