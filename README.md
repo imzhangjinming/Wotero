@@ -4,7 +4,7 @@ Wotero 是一个[Zotero 插件](https://www.zotero.org/support/plugins)，用来
 
 ## 目录
 
-- [Wotero 的工作原理](#wotero的工作原理)
+- [Wotero的工作原理](#wotero的工作原理)
 - [安装与使用](#安装与使用)
 - [wolai 笔记创建流程分享](#wolai笔记创建流程分享)
 - [感谢](#感谢)
@@ -22,7 +22,7 @@ Wotero 是一个[Zotero 插件](https://www.zotero.org/support/plugins)，用来
 - Link references to entries in other databases, such as projects, tasks,
   manuscripts in your publication pipeline, publishing outlets, etc.
 
-## Wotero 的工作原理
+## Wotero的工作原理
 
 Wotero 的工作原理与[Notero](https://github.com/dvanoni/notero)完全相同。事实上，Wotero 是在 Notero 的 fork 版本上改进而来，因此我也很乐意使用"原插件名+wolai"来命名这个插件。但是 Notero 即 Notion+Zotero ，再加上 wolai 的后缀就显得相当奇怪，所以我借鉴原作者的命名巧思，将此款插件命名为 Wotero，即 Wolai+Zotero。
 
@@ -155,7 +155,7 @@ _Notero 还能在用户修改某个 Zotero 文献的信息后自动更新其对�
 
     </details>
 
-## wolai 笔记创建流程分享
+## wolai笔记创建流程分享
 
 [Zotero Connector](https://www.zotero.org/download/connectors) 提供了从浏览器一键将文献保存至 Zotero 的便利，Wotero 提供了从 Zotero 一键同步至 Wolai 的便利，而 Wolai 作为论文笔记的最后一站，如果能够一键生成论文阅读笔记模板，那么从网页到写笔记的过程将会非常顺滑。
 
