@@ -1,14 +1,14 @@
 {
-  "name": "notero",
-  "version": "0.4.6",
-  "description": "Sync Zotero items into a Notion database",
+  "name": "wotero",
+  "version": "0.0.1",
+  "description": "Sync Zotero items into a Wolai database",
   "scripts": {
     "build": "node esbuild.js",
     "clean": "rm -r build gen xpi",
     "generateUpdateManifest": "zotero-plugin-generate-update",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --fix",
-    "postbuild": "zotero-plugin-zipup build notero",
+    "postbuild": "zotero-plugin-zipup build wotero",
     "postinstall": "patch-package",
     "prepare": "husky install",
     "prettier": "prettier --check .",
@@ -23,16 +23,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dvanoni/notero.git"
+    "url": "https://github.com/imzhangjinming/Wotero.git"
   },
   "author": {
     "name": "David Hoff-Vanoni",
     "email": "david@vanoni.dev"
   },
   "bugs": {
-    "url": "https://github.com/dvanoni/notero/issues"
+    "url": "https://github.com/imzhangjinming/Wotero/issues"
   },
-  "homepage": "https://github.com/dvanoni/notero",
+  "homepage": "https://github.com/imzhangjinming/Wotero",
   "dependencies": {
     "@notionhq/client": "^2.2.3",
     "child_process": "^1.0.2",
@@ -67,8 +67,8 @@
     "typescript": "^5.0.3"
   },
   "xpi": {
-    "name": "Notero",
+    "name": "Wotero",
     "bootstrapped": true,
-    "releaseURL": "https://github.com/dvanoni/notero/releases/download/release/"
+    "releaseURL": "https://github.com/imzhangjinming/Wotero/releases/download/release/"
   }
 }

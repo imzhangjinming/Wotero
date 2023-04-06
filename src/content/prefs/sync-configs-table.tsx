@@ -17,14 +17,14 @@ import {
 const COLUMNS = [
   {
     dataKey: 'syncEnabled',
-    label: getLocalizedString('notero.preferences.syncEnabledColumn'),
+    label: getLocalizedString('wotero.preferences.syncEnabledColumn'),
     type: 'checkbox',
     fixedWidth: true,
     width: 100,
   },
   {
     dataKey: 'collectionFullName',
-    label: getLocalizedString('notero.preferences.collectionColumn'),
+    label: getLocalizedString('wotero.preferences.collectionColumn'),
   },
 ] as const;
 
@@ -135,7 +135,7 @@ export default class SyncConfigsTable extends React.Component {
     return (
       <IntlProvider locale={Zotero.locale}>
         <VirtualizedTable
-          id="notero-syncConfigsTable"
+          id="wotero-syncConfigsTable"
           columns={COLUMNS}
           getRowCount={this.getRowCount}
           getRowString={this.getRowString}

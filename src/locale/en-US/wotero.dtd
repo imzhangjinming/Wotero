@@ -1,0 +1,22 @@
+<!ENTITY wotero "Sync Zotero items into a Wolai database">
+
+<!-- Preferences Window -->
+
+<!ENTITY wotero.preferences.title "Wotero Preferences">
+
+<!ENTITY wotero.preferences.wolaiGroupboxCaption "Wolai Preferences">
+<!ENTITY wotero.preferences.wolaiGroupboxDescription "For instructions on obtaining these values, view the ">
+<!ENTITY wotero.preferences.readme "README">
+<!ENTITY wotero.preferences.wolaiToken "Wolai appToken">
+<!ENTITY wotero.preferences.wolaiDatabaseID "Database ID">
+
+<!ENTITY wotero.preferences.propertiesGroupboxCaption "Property Preferences">
+<!ENTITY wotero.preferences.propertiesGroupboxDescription "Customize how item properties sync to Wolai.">
+<!ENTITY wotero.preferences.pageTitleFormat "Wolai Page Title">
+
+<!ENTITY wotero.preferences.syncGroupboxCaption "Sync Preferences">
+<!ENTITY wotero.preferences.syncGroupboxDescription1 "Wotero will monitor the collections enabled below. Items in the enabled collections will sync to Wolai when added to that collection and whenever the items are modified.">
+<!ENTITY wotero.preferences.syncGroupboxDescription2 "To enable/disable a collection, either select the row and press the [Enter] key or double-click the row. To select multiple rows, hold [Shift] and then click.">
+<!ENTITY wotero.preferences.collectionColumn "Collection">
+<!ENTITY wotero.preferences.syncEnabledColumn "Sync Enabled">
+<!ENTITY wotero.preferences.syncOnModifyItems "Sync when items are modified">

@@ -3,10 +3,10 @@ import Wolai from '../wolai';
 import { wolaiTitleBuilder } from '../wolai';
 import { loadSyncEnabledCollectionIDs } from '../prefs/collection-sync-config';
 import {
-  getNoteroPref,
-  NoteroPref,
+  getWoteroPref,
+  WoteroPref,
   PageTitleFormat,
-} from '../prefs/notero-pref';
+} from '../prefs/wotero-pref';
 import {
   getAllCollectionItems,
   getLocalizedString,
@@ -71,6 +71,35 @@ export default class SyncManager implements Service {
   ) {
     const collectionIDs = loadSyncEnabledCollectionIDs();
     if (requireSyncedCollections && !collectionIDs.size) return;
+    
+    // const regular_items = items.filter((item)=>!item.deleted &&
+    // item.isRegularItem())
+
+    // regular_items.forEach((item) => {
+    //   if(Zotero.Items.get(
+    //     item
+    //       .getAttachments(false)
+    //       .slice()
+    //       // Sort to get largest ID first
+    //       .sort((a, b) => b - a)
+    //   ).filter((attachment) => attachment.getDisplayTitle()?.toLowerCase() === Wolai.TAG_NAME
+    //   ).length !== 0){
+
+    //     let temp_items = Zotero.Items.get(
+    //       item
+    //         .getAttachments(false)
+    //         .slice()
+    //         // Sort to get largest ID first
+    //         .sort((a, b) => b - a)
+    //     ).filter((attachment) => 
+    //         attachment.getDisplayTitle().toLowerCase() === Wolai.TAG_NAME
+    //     )
+
+    //     temp_items.forEach((temp_item)=>
+    //         Zotero.Items.erase(temp_item.id)
+    //     )
+    //   }
+    // })
 
     const validItems = items.filter(
       (item) =>
@@ -80,15 +109,14 @@ export default class SyncManager implements Service {
           item
             .getCollections()
             .some((collectionID) => collectionIDs.has(collectionID))) &&
-        Zotero.Items.get(
+        (Zotero.Items.get(
           item
             .getAttachments(false)
             .slice()
             // Sort to get largest ID first
             .sort((a, b) => b - a)
-        ).filter((attachment) =>
-          attachment.getField('url')?.startsWith(Wolai.APP_URL_PROTOCOL)
-        ).length === 0
+        ).filter((attachment) => attachment.getDisplayTitle().toLowerCase() === Wolai.TAG_NAME
+        ).length === 0)
     );
 
     if (validItems.length) {
@@ -104,7 +132,7 @@ export default class SyncManager implements Service {
   private getItemsForNotifierEvent(
     ...[event, ids]: NotifierEventParams
   ): Zotero.Item[] {
-    const syncOnModifyItems = getNoteroPref(NoteroPref.syncOnModifyItems);
+    const syncOnModifyItems = getWoteroPref(WoteroPref.syncOnModifyItems);
 
     if (!syncOnModifyItems) {
       if (event === 'collection-item.add') {
@@ -149,16 +177,16 @@ export default class SyncManager implements Service {
   }
 
   private getWolai() {
-    const authToken = getNoteroPref(NoteroPref.notionToken);
-    const databaseID = getNoteroPref(NoteroPref.notionDatabaseID);
+    const authToken = getWoteroPref(WoteroPref.wolaiToken);
+    const databaseID = getWoteroPref(WoteroPref.wolaiDatabaseID);
 
     if (!authToken) {
-      throw new Error(`Missing ${getLocalizedString(NoteroPref.notionToken)}`);
+      throw new Error(`Missing ${getLocalizedString(WoteroPref.wolaiToken)}`);
     }
 
     if (!databaseID) {
       throw new Error(
-        `Missing ${getLocalizedString(NoteroPref.notionDatabaseID)}`
+        `Missing ${getLocalizedString(WoteroPref.wolaiDatabaseID)}`
       );
     }
 
@@ -179,7 +207,7 @@ export default class SyncManager implements Service {
     };
 
     const format =
-      getNoteroPref(NoteroPref.pageTitleFormat) || PageTitleFormat.itemTitle;
+      getWoteroPref(WoteroPref.pageTitleFormat) || PageTitleFormat.itemTitle;
     const buildTitle = titleBuilders[format];
 
     return async (item) => (await buildTitle(item)) || item.getTitle();
@@ -263,7 +291,7 @@ export default class SyncManager implements Service {
     this.progressWindow.changeHeadline('Saving items to Wolai...');
     this.progressWindow.show();
     const itemProgress = new this.progressWindow.ItemProgress(
-      'chrome://notero/content/style/wolai_icon_32.png',
+      'chrome://wotero/content/style/wolai_icon_32.png',
       ''
     );
 
@@ -277,7 +305,17 @@ export default class SyncManager implements Service {
           const progressMessage = `Item ${step} of ${items.length}`;
           log(`Saving ${progressMessage} with ID ${item.id}`);
           itemProgress.setText(progressMessage);
-          await this.saveItemToWolai(item, wolai, wolaiBuildTitle);
+          try {
+            await this.saveItemToWolai(item, wolai, wolaiBuildTitle);
+          } catch (error){
+            const errorMessage = String(error);
+            log(errorMessage, 'error');
+            if (hasErrorStack(error)) {
+              log(error.stack, 'error');
+            }
+            itemProgress.setError();
+            this.progressWindow.addDescription(errorMessage);
+          }
           itemProgress.setProgress((step / items.length) * PERCENTAGE_MULTIPLIER);
         }
         itemProgress.setIcon(SyncManager.tickIcon);

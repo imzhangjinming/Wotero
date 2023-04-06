@@ -11,9 +11,9 @@ export default class ChromeManager implements Service {
     const manifestURI = Services.io.newURI(rootURI + 'manifest.json');
 
     this.chromeHandle = aomStartup.registerChrome(manifestURI, [
-      ['content', 'notero', 'content/'],
-      ['locale', 'notero', 'en-US', 'locale/en-US/'],
-      ['locale', 'notero', 'zh-CN', 'locale/zh-CN/'],
+      ['content', 'wotero', 'content/'],
+      ['locale', 'wotero', 'en-US', 'locale/en-US/'],
+      ['locale', 'wotero', 'zh-CN', 'locale/zh-CN/'],
     ]);
   }
 

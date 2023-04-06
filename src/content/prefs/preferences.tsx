@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom';
 
 import { getLocalizedString, getXULElementById } from '../utils';
 
-import { PageTitleFormat } from './notero-pref';
+import { PageTitleFormat } from './wotero-pref';
 import SyncConfigsTable from './sync-configs-table';
 
 class Preferences {
   private pageTitleFormatMenu!: XUL.MenuListElement;
 
   public async init(): Promise<void> {
-    this.pageTitleFormatMenu = getXULElementById('notero-pageTitleFormat');
+    this.pageTitleFormatMenu = getXULElementById('wotero-pageTitleFormat');
 
     await Zotero.uiReadyPromise;
 
@@ -19,13 +19,13 @@ class Preferences {
 
     ReactDOM.render(
       <SyncConfigsTable />,
-      document.getElementById('notero-syncConfigsTable-container')
+      document.getElementById('wotero-syncConfigsTable-container')
     );
   }
 
   private initPageTitleFormatMenu(): void {
     Object.values(PageTitleFormat).forEach((format) => {
-      const label = getLocalizedString(`notero.pageTitleFormat.${format}`);
+      const label = getLocalizedString(`wotero.pageTitleFormat.${format}`);
       const item = this.pageTitleFormatMenu.appendItem(label, format);
       if (format === this.pageTitleFormatMenu.value) {
         this.pageTitleFormatMenu.selectedItem = item;
@@ -35,7 +35,7 @@ class Preferences {
   }
 
   public openReadme(): void {
-    Zotero.launchURL('https://github.com/dvanoni/notero#readme');
+    Zotero.launchURL('https://github.com/imzhangjinming/Wotero#readme');
   }
 }
 

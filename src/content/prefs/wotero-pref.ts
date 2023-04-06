@@ -1,7 +1,7 @@
-export enum NoteroPref {
+export enum WoteroPref {
   collectionSyncConfigs = 'collectionSyncConfigs',
-  notionDatabaseID = 'notionDatabaseID',
-  notionToken = 'notionToken',
+  wolaiDatabaseID = 'wolaiDatabaseID',
+  wolaiToken = 'wolaiToken',
   pageTitleFormat = 'pageTitleFormat',
   syncOnModifyItems = 'syncOnModifyItems',
 }
@@ -14,16 +14,16 @@ export enum PageTitleFormat {
   itemTitle = 'itemTitle',
 }
 
-type NoteroPrefValue = Partial<{
-  [NoteroPref.collectionSyncConfigs]: string;
-  [NoteroPref.notionDatabaseID]: string;
-  [NoteroPref.notionToken]: string;
-  [NoteroPref.pageTitleFormat]: PageTitleFormat;
-  [NoteroPref.syncOnModifyItems]: boolean;
+type WoteroPrefValue = Partial<{
+  [WoteroPref.collectionSyncConfigs]: string;
+  [WoteroPref.wolaiDatabaseID]: string;
+  [WoteroPref.wolaiToken]: string;
+  [WoteroPref.pageTitleFormat]: PageTitleFormat;
+  [WoteroPref.syncOnModifyItems]: boolean;
 }>;
 
-function buildFullPrefName(pref: NoteroPref): string {
-  return `extensions.notero.${pref}`;
+function buildFullPrefName(pref: WoteroPref): string {
+  return `extensions.wotero.${pref}`;
 }
 
 function getBooleanPref(value: Zotero.Prefs.Value): boolean | undefined {
@@ -49,34 +49,34 @@ function getPageTitleFormatPref(
   return isPageTitleFormat(value) ? value : undefined;
 }
 
-export function clearNoteroPref(pref: NoteroPref): void {
+export function clearWoteroPref(pref: WoteroPref): void {
   Zotero.Prefs.clear(buildFullPrefName(pref), true);
 }
 
-export function getNoteroPref<P extends NoteroPref>(
+export function getWoteroPref<P extends WoteroPref>(
   pref: P
-): NoteroPrefValue[P] {
+): WoteroPrefValue[P] {
   const value = Zotero.Prefs.get(buildFullPrefName(pref), true);
 
   const booleanPref = getBooleanPref(value);
   const stringPref = getStringPref(value);
 
   const pageTitleFormatPref =
-    (pref === NoteroPref.pageTitleFormat && getPageTitleFormatPref(value)) ||
+    (pref === WoteroPref.pageTitleFormat && getPageTitleFormatPref(value)) ||
     undefined;
 
   return {
-    [NoteroPref.collectionSyncConfigs]: stringPref,
-    [NoteroPref.notionDatabaseID]: stringPref,
-    [NoteroPref.notionToken]: stringPref,
-    [NoteroPref.pageTitleFormat]: pageTitleFormatPref,
-    [NoteroPref.syncOnModifyItems]: booleanPref,
+    [WoteroPref.collectionSyncConfigs]: stringPref,
+    [WoteroPref.wolaiDatabaseID]: stringPref,
+    [WoteroPref.wolaiToken]: stringPref,
+    [WoteroPref.pageTitleFormat]: pageTitleFormatPref,
+    [WoteroPref.syncOnModifyItems]: booleanPref,
   }[pref];
 }
 
-export function setNoteroPref<P extends NoteroPref>(
+export function setWoteroPref<P extends WoteroPref>(
   pref: P,
-  value: NoteroPrefValue[P]
+  value: WoteroPrefValue[P]
 ): void {
   Zotero.Prefs.set(buildFullPrefName(pref), value, true);
 }

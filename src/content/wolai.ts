@@ -13,7 +13,9 @@ export default class Wolai {
   private readonly authToken: string;
   private _databaseProperties?: string[];
 
-  static APP_URL_PROTOCOL = 'wolai:';
+  static APP_URL_PROTOCOL = '';
+
+  static TAG_NAME = 'wolai';
 
   static PAGE_URL_REGEX = new RegExp(
     `^${Wolai.APP_URL_PROTOCOL}.+([0-9a-f]{32})$`
@@ -109,7 +111,7 @@ export default class Wolai {
       'https://openapi.wolai.com/v1/databases/' + this.databaseID + '/rows';
 
     try {
-      const response = await Zotero.HTTP.request('POST', url, {
+        const response = await Zotero.HTTP.request('POST', url, {
         body: data,
         headers: { Authorization: this.authToken },
       });
@@ -130,6 +132,10 @@ export default class Wolai {
       return content['data'];
     } catch (error) {
       log(error, 'error');
+      log('type of error ------->');
+      log(typeof error);
+      log('error meaaage ------->');
+      log(JSON.stringify(error));
       throw error;
     }
   }
@@ -236,14 +242,14 @@ export default class Wolai {
       },
     ];
 
-    for (const { name, buildRequest } of propertyDefinitions) {
-      const request = await buildRequest();
-      itemProperties[name] = request;
-    }
-    log('===========================================================================')
-    log(typeof itemProperties);
-    log(JSON.stringify(itemProperties))
-    log('===========================================================================')
+    // for (const { name, buildRequest } of propertyDefinitions) {
+    //   const request = await buildRequest();
+    //   itemProperties[name] = request;
+    // }
+    // log('===========================================================================')
+    // log(typeof itemProperties);
+    // log(JSON.stringify(itemProperties))
+    // log('===========================================================================')
 
     const validPropertyDefinitions =
       propertyDefinitions.filter(databaseHasProperty);

@@ -28,7 +28,7 @@ export default class UIManager implements Service {
 
   private initCollectionMenuItem() {
     this.createMenuItem({
-      labelName: 'notero.collectionMenu.sync',
+      labelName: 'wotero.collectionMenu.sync',
       parentId: 'zotero-collectionmenu',
       onCommand: () => {
         const collection =
@@ -42,7 +42,7 @@ export default class UIManager implements Service {
 
   private initItemMenuItem() {
     this.createMenuItem({
-      labelName: 'notero.itemMenu.sync',
+      labelName: 'wotero.itemMenu.sync',
       parentId: 'zotero-itemmenu',
       onCommand: () => {
         const items = Zotero.getActiveZoteroPane()?.getSelectedItems(false);
@@ -56,7 +56,7 @@ export default class UIManager implements Service {
 
   private initToolsMenuItem() {
     this.createMenuItem({
-      labelName: 'notero.toolsMenu.preferences',
+      labelName: 'wotero.toolsMenu.preferences',
       parentId: 'menu_ToolsPopup',
       onCommand: () => {
         this.openPreferences();
@@ -91,8 +91,8 @@ export default class UIManager implements Service {
 
   private openPreferences() {
     this.window.openDialog(
-      'chrome://notero/content/prefs/preferences.xul',
-      'notero-preferences'
+      'chrome://wotero/content/prefs/preferences.xul',
+      'wotero-preferences'
     );
   }
 }

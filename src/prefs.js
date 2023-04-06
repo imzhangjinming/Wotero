@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
-pref('extensions.notero.collectionSyncConfigs', '');
-pref('extensions.notero.notionToken', '');
-pref('extensions.notero.notionDatabaseID', '');
-pref('extensions.notero.pageTitleFormat', 'itemAuthorDateCitation');
-pref('extensions.notero.syncOnModifyItems', true);
+pref('extensions.wotero.collectionSyncConfigs', '');
+pref('extensions.wotero.wolaiToken', '');
+pref('extensions.wotero.wolaiDatabaseID', '');
+pref('extensions.wotero.pageTitleFormat', 'itemAuthorDateCitation');
+pref('extensions.wotero.syncOnModifyItems', true);

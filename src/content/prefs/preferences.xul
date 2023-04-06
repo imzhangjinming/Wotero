@@ -2,63 +2,63 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://zotero-platform/content/preferences.css" type="text/css"?>
 <?xml-stylesheet href="chrome://zotero-platform/content/zotero-react-client.css" type="text/css"?>
-<?xml-stylesheet href="chrome://notero/content/style/preferences.css" type="text/css"?>
-<!DOCTYPE prefwindow SYSTEM "chrome://notero/locale/notero.dtd">
+<?xml-stylesheet href="chrome://wotero/content/style/preferences.css" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://wotero/locale/wotero.dtd">
 
-<!-- The `notero` variable used below is defined in `esbuild.js` -->
+<!-- The `wotero` variable used below is defined in `esbuild.js` -->
 <prefwindow
-    id="notero-prefwindow"
-    title="&notero.preferences.title;"
+    id="wotero-prefwindow"
+    title="&wotero.preferences.title;"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
-  <prefpane id="notero-prefpane" onpaneload="notero.preferences.init();">
+  <prefpane id="wotero-prefpane" onpaneload="wotero.preferences.init();">
     <preferences>
       <preference id="pref-collectionSyncConfigs"
-                  name="extensions.notero.collectionSyncConfigs"
+                  name="extensions.wotero.collectionSyncConfigs"
                   type="string" />
-      <preference id="pref-notionToken" name="extensions.notero.notionToken" type="string" />
-      <preference id="pref-notionDatabaseID"
-                  name="extensions.notero.notionDatabaseID"
+      <preference id="pref-wolaiToken" name="extensions.wotero.wolaiToken" type="string" />
+      <preference id="pref-wolaiDatabaseID"
+                  name="extensions.wotero.wolaiDatabaseID"
                   type="string" />
       <preference id="pref-pageTitleFormat"
-                  name="extensions.notero.pageTitleFormat"
+                  name="extensions.wotero.pageTitleFormat"
                   type="string" />
       <preference id="pref-syncOnModifyItems"
-                  name="extensions.notero.syncOnModifyItems"
+                  name="extensions.wotero.syncOnModifyItems"
                   type="bool" />
     </preferences>
 
     <groupbox>
-      <caption label="&notero.preferences.notionGroupboxCaption;" />
+      <caption label="&wotero.preferences.wolaiGroupboxCaption;" />
       <description>
-        &notero.preferences.notionGroupboxDescription;
+        &wotero.preferences.wolaiGroupboxDescription;
         <label class="text-link"
-               onclick="notero.preferences.openReadme();"
-               value="&notero.preferences.readme;" />.
+               onclick="wotero.preferences.openReadme();"
+               value="&wotero.preferences.readme;" />.
       </description>
       <separator class="thin" />
-      <label id="notero-notionToken-label"
-             value="&notero.preferences.notionToken;"
-             control="notero-notionToken" />
-      <textbox id="notero-notionToken" preference="pref-notionToken" />
+      <label id="wotero-wolaiToken-label"
+             value="&wotero.preferences.wolaiToken;"
+             control="wotero-wolaiToken" />
+      <textbox id="wotero-wolaiToken" preference="pref-wolaiToken" />
       <separator class="thin" />
-      <label id="notero-notionDatabaseID-label"
-             value="&notero.preferences.notionDatabaseID;"
-             control="notero-notionDatabaseID" />
-      <textbox id="notero-notionDatabaseID" preference="pref-notionDatabaseID" />
+      <label id="wotero-wolaiDatabaseID-label"
+             value="&wotero.preferences.wolaiDatabaseID;"
+             control="wotero-wolaiDatabaseID" />
+      <textbox id="wotero-wolaiDatabaseID" preference="pref-wolaiDatabaseID" />
     </groupbox>
 
     <separator class="thin" />
 
     <groupbox>
-      <caption label="&notero.preferences.propertiesGroupboxCaption;" />
-      <description>&notero.preferences.propertiesGroupboxDescription;</description>
+      <caption label="&wotero.preferences.propertiesGroupboxCaption;" />
+      <description>&wotero.preferences.propertiesGroupboxDescription;</description>
       <separator class="thin" />
-      <label id="notero-pageTitleFormat-label"
-             value="&notero.preferences.pageTitleFormat;"
-             control="notero-pageTitleFormat" />
-      <menulist id="notero-pageTitleFormat"
+      <label id="wotero-pageTitleFormat-label"
+             value="&wotero.preferences.pageTitleFormat;"
+             control="wotero-pageTitleFormat" />
+      <menulist id="wotero-pageTitleFormat"
                 disabled="true"
                 preference="pref-pageTitleFormat" />
     </groupbox>
@@ -66,16 +66,16 @@
     <separator class="thin" />
 
     <groupbox>
-      <caption label="&notero.preferences.syncGroupboxCaption;" />
-      <description>&notero.preferences.syncGroupboxDescription1;</description>
-      <description>&notero.preferences.syncGroupboxDescription2;</description>
+      <caption label="&wotero.preferences.syncGroupboxCaption;" />
+      <description>&wotero.preferences.syncGroupboxDescription1;</description>
+      <description>&wotero.preferences.syncGroupboxDescription2;</description>
       <separator class="thin" />
       <hbox class="virtualized-table-container" flex="1" height="220px">
-        <html:div id="notero-syncConfigsTable-container" />
+        <html:div id="wotero-syncConfigsTable-container" />
       </hbox>
       <separator class="thin" />
-      <checkbox id="notero-syncOnModifyItems"
-                label="&notero.preferences.syncOnModifyItems;"
+      <checkbox id="wotero-syncOnModifyItems"
+                label="&wotero.preferences.syncOnModifyItems;"
                 preference="pref-syncOnModifyItems" />
     </groupbox>
   </prefpane>

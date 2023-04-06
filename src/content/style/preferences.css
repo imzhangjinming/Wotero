@@ -1,15 +1,15 @@
-#notero-prefpane {
+#wotero-prefpane {
   width: 580px;
 }
 
-#notero-prefpane description {
+#wotero-prefpane description {
   font-size: 12px;
 }
 
-#notero-prefpane groupbox:last-of-type {
+#wotero-prefpane groupbox:last-of-type {
   margin-bottom: 3em;
 }
 
-#notero-prefpane label.text-link {
+#wotero-prefpane label.text-link {
   margin: 0;
 }

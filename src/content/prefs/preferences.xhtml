@@ -1,66 +1,66 @@
-<vbox onload="notero.preferences.init();">
+<vbox onload="wotero.preferences.init();">
   <vbox class="main-section">
-    <html:h1>&notero.preferences.notionGroupboxCaption;</html:h1>
+    <html:h1>&wotero.preferences.wolaiGroupboxCaption;</html:h1>
     <description>
-      &notero.preferences.notionGroupboxDescription;
+      &wotero.preferences.wolaiGroupboxDescription;
       <label
         is="zotero-text-link"
-        href="https://github.com/dvanoni/notero#readme"
-        value="&notero.preferences.readme;"
+        href="https://github.com/imzhangjinming/Wotero#readme"
+        value="&wotero.preferences.readme;"
       />.
     </description>
     <groupbox>
-      <label control="notero-notionToken">
-        <html:h2>&notero.preferences.notionToken;</html:h2>
+      <label control="wotero-wolaiToken">
+        <html:h2>&wotero.preferences.wolaiToken;</html:h2>
       </label>
       <html:input
-        id="notero-notionToken"
-        preference="extensions.notero.notionToken"
+        id="wotero-wolaiToken"
+        preference="extensions.wotero.wolaiToken"
         type="text"
       />
-      <label control="notero-notionDatabaseID">
-        <html:h2>&notero.preferences.notionDatabaseID;</html:h2>
+      <label control="wotero-wolaiDatabaseID">
+        <html:h2>&wotero.preferences.wolaiDatabaseID;</html:h2>
       </label>
       <html:input
-        id="notero-notionDatabaseID"
-        preference="extensions.notero.notionDatabaseID"
+        id="wotero-wolaiDatabaseID"
+        preference="extensions.wotero.wolaiDatabaseID"
         type="text"
       />
     </groupbox>
   </vbox>
 
   <vbox class="main-section">
-    <html:h1>&notero.preferences.propertiesGroupboxCaption;</html:h1>
+    <html:h1>&wotero.preferences.propertiesGroupboxCaption;</html:h1>
     <description>
-      &notero.preferences.propertiesGroupboxDescription;
+      &wotero.preferences.propertiesGroupboxDescription;
     </description>
     <groupbox>
-      <label control="notero-pageTitleFormat">
-        <html:h2>&notero.preferences.pageTitleFormat;</html:h2>
+      <label control="wotero-pageTitleFormat">
+        <html:h2>&wotero.preferences.pageTitleFormat;</html:h2>
       </label>
       <menulist
-        id="notero-pageTitleFormat"
+        id="wotero-pageTitleFormat"
         disabled="true"
         native="true"
-        preference="extensions.notero.pageTitleFormat"
+        preference="extensions.wotero.pageTitleFormat"
       />
     </groupbox>
   </vbox>
 
   <vbox class="main-section">
-    <html:h1>&notero.preferences.syncGroupboxCaption;</html:h1>
-    <description>&notero.preferences.syncGroupboxDescription1;</description>
-    <description>&notero.preferences.syncGroupboxDescription2;</description>
+    <html:h1>&wotero.preferences.syncGroupboxCaption;</html:h1>
+    <description>&wotero.preferences.syncGroupboxDescription1;</description>
+    <description>&wotero.preferences.syncGroupboxDescription2;</description>
     <separator class="thin" />
     <hbox class="virtualized-table-container" flex="1" height="220px">
-      <html:div id="notero-syncConfigsTable-container" />
+      <html:div id="wotero-syncConfigsTable-container" />
     </hbox>
     <separator class="thin" />
     <checkbox
-      id="notero-syncOnModifyItems"
-      label="&notero.preferences.syncOnModifyItems;"
+      id="wotero-syncOnModifyItems"
+      label="&wotero.preferences.syncOnModifyItems;"
       native="true"
-      preference="extensions.notero.syncOnModifyItems"
+      preference="extensions.wotero.syncOnModifyItems"
     />
   </vbox>
 </vbox>

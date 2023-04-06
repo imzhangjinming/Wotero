@@ -1,4 +1,4 @@
-const LOG_PREFIX = 'Notero: ';
+const LOG_PREFIX = 'Wotero: ';
 
 export default function log(
   message: string | unknown,

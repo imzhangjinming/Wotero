@@ -1,12 +1,12 @@
-import type { Notero } from './content/notero';
+import type { Wotero } from './content/wotero';
 
-const LOG_PREFIX = 'Notero: ';
+const LOG_PREFIX = 'Wotero: ';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 if (typeof Zotero === 'undefined') {
   // eslint-disable-next-line no-var
-  var Zotero: Zotero & { Notero?: Notero };
+  var Zotero: Zotero & { Wotero?: Wotero };
 }
 
 function log(msg: string) {
@@ -112,9 +112,9 @@ async function startup(
     ) as { Services: Services };
   }
 
-  Services.scriptloader.loadSubScript(rootURI + 'content/notero.js');
+  Services.scriptloader.loadSubScript(rootURI + 'content/wotero.js');
 
-  void Zotero.Notero?.startup(id, rootURI);
+  void Zotero.Wotero?.startup(id, rootURI);
 }
 
 /**
@@ -127,9 +127,9 @@ async function startup(
 function shutdown(_data: BootstrapData, _reason: Zotero.Plugins.REASONS) {
   log('Shutting down');
 
-  Zotero.Notero?.shutdown();
+  Zotero.Wotero?.shutdown();
 
-  delete Zotero.Notero;
+  delete Zotero.Wotero;
 }
 
 /**

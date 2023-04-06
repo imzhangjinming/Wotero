@@ -1,4 +1,3 @@
-import Notion from './notion';
 import Wolai from './wolai';
 import { buildCollectionFullName } from './utils';
 
@@ -183,7 +182,9 @@ export default class WoteroItem {
       .sort((a, b) => b - a);
 
     return Zotero.Items.get(attachmentIDs).filter((attachment) =>
-      attachment.getField('url')?.startsWith(Wolai.APP_URL_PROTOCOL)
+      {
+        attachment.getDisplayTitle().toLowerCase() === WoteroItem.WOLAI_TAG_NAME
+      }
     );
   }
 
@@ -219,7 +220,7 @@ export default class WoteroItem {
     attachment.setNote(`
 <h2 style="background-color: #ff666680;">Do not delete!</h2>
 <p>This link attachment serves as a reference for
-<a href="https://github.com/dvanoni/notero">Wotero</a>
+<a href="https://github.com/imzhangjinming/Wotero">Wotero</a>
 so that it can properly update the Wolai page for this item.</p>
 <p>Last synced: ${new Date().toLocaleString()}</p>
 `);
