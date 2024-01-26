@@ -2,3 +2,4 @@ build
 gen
 node_modules
 esbuild.js
+src/content/wolai.ts
