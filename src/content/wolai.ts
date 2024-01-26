@@ -106,14 +106,19 @@ export default class Wolai {
 
     log('---------data-----------');
     log(data);
+    log(this.authToken)
 
-    let url =
-      'https://openapi.wolai.com/v1/databases/' + this.databaseID + '/rows';
+    let url = 'https://openapi.wolai.com/v1/databases/' + this.databaseID + '/rows';
+      //'https://openapi.wolai.com/v1/databases/{id}/rows';
 
     try {
       const response = await Zotero.HTTP.request('POST', url, {
         body: data,
-        headers: { Authorization: this.authToken },
+        headers: {
+                      "Authorization": this.authToken ,
+                      'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+                      'Content-Type': 'application/json'
+                  }
       });
       log(
         '==========================================================================='
